@@ -12,7 +12,7 @@ GET /fibonacci?n={number}
 
 #### 正常系
 
-```json
+```
 StatusCode:
 200
 
@@ -26,7 +26,7 @@ Body:
 
 リクエストパラメータが不正な場合
 
-```json
+```
 StatusCode:
 400
 Body:
@@ -38,7 +38,7 @@ Body:
 
 サーバーエラーが発生した場合
 
-```json
+```
 StatusCode:
 500
 Body:
