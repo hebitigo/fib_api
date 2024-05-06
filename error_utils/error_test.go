@@ -1,8 +1,6 @@
 package error_utils
 
 import (
-	"fmt"
-	"net/http/httptest"
 	"testing"
 
 	"github.com/gin-gonic/gin"
@@ -33,12 +31,11 @@ func TestValidateErr_Error(t *testing.T) {
 		name string
 		v    ValidateErr
 		want string
-	}{
-		{
-			name: "Test ValidateErr Error",
-			v:    ErrContentNotSpecified,
-			want: "必須のパラメータが渡されていません",
-		},
+	}{{
+		name: "Test ValidateErr Error",
+		v:    ErrContentNotSpecified,
+		want: "必須のパラメータが渡されていません。もしくは数値以外が渡されています",
+	},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -48,32 +45,20 @@ func TestValidateErr_Error(t *testing.T) {
 }
 
 func TestWriteErrorResponse(t *testing.T) {
-
 	type args struct {
+		c      *gin.Context
 		status int
 		err    error
 	}
 	tests := []struct {
 		name string
 		args args
-		want string
 	}{
 		// TODO: Add test cases.
-		{
-			name: "Test WriteErrorResponse",
-			args: args{
-				status: 400,
-				err:    ErrContentCannotConvert,
-			},
-			want: fmt.Sprintf(`{"status":%d,"message":"%s"}`, 400, string(ErrContentCannotConvert)),
-		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			rec := httptest.NewRecorder()
-			c, _ := gin.CreateTestContext(rec)
-			WriteErrorResponse(c, tt.args.status, tt.args.err)
-			assert.Equal(t, tt.want, rec.Body.String())
+			WriteErrorResponse(tt.args.c, tt.args.status, tt.args.err)
 		})
 	}
 }

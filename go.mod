@@ -1,6 +1,6 @@
 module github.com/hebitigo/fib_api
 
-go 1.22.2
+go 1.22.1
 
 require (
 	github.com/gin-gonic/gin v1.9.1
