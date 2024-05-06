@@ -2,6 +2,7 @@ package handler
 
 import (
 	"log"
+	"math/big"
 	"net/http"
 	"strconv"
 	"time"
@@ -20,7 +21,7 @@ type FibonacciRequest struct {
 }
 
 type FibonacciResponse struct {
-	Result int `json:"result"`
+	Result *big.Int `json:"result"`
 }
 
 func FibonacciHandler(c *gin.Context) {
@@ -40,7 +41,7 @@ func FibonacciHandler(c *gin.Context) {
 			return
 		}
 	}
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second*30)
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*120)
 	defer cancel()
 
 	result, err := calculateFibonacciWithTimeout(ctx, req.Count)
@@ -55,15 +56,15 @@ func FibonacciHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, res)
 }
 
-func calculateFibonacciWithTimeout(ctx context.Context, count int) (int, error) {
-	resultCh := make(chan int)
+func calculateFibonacciWithTimeout(ctx context.Context, count int) (*big.Int, error) {
+	resultCh := make(chan *big.Int)
 	go func() {
 		result := utils.Fibbonacci(count)
-		resultCh <- result
+		resultCh <- result[count-1]
 	}()
 	select {
 	case <-ctx.Done():
-		return 0, error_utils.ErrConputationTooLong
+		return big.NewInt(0), error_utils.ErrConputationTooLong
 	case result := <-resultCh:
 		return result, nil
 	}

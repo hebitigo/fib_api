@@ -1,8 +1,19 @@
 package utils
 
-func Fibbonacci(n int) int {
-	if n <= 1 {
-		return n
+import "math/big"
+
+func Fibbonacci(n int) []*big.Int {
+	if n <= 0 {
+		return nil
+	} else if n == 1 {
+		return []*big.Int{big.NewInt(1)}
 	}
-	return Fibbonacci(n-1) + Fibbonacci(n-2)
+
+	fib := make([]*big.Int, n)
+	fib[0] = big.NewInt(1)
+	fib[1] = big.NewInt(1)
+	for i := 2; i < n; i++ {
+		fib[i] = new(big.Int).Add(fib[i-1], fib[i-2])
+	}
+	return fib
 }
