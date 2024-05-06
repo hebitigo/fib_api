@@ -17,10 +17,11 @@ func (v ValidateErr) Error() string {
 }
 
 const (
-	ErrContentNotSpecified  ValidateErr = "必須のパラメータが渡されていません"
+	ErrContentNotSpecified  ValidateErr = "必須のパラメータが渡されていない。もしくは数値以外が渡されています"
 	ErrContentIsNegative    ValidateErr = "負の値は許可されていません"
 	ErrContentCannotConvert APIErr      = "渡されたパラメータは上手く変換できませんでした。構造を確認してください"
 	ErrConputationTooLong   APIErr      = "計算時間が長すぎます"
+	ErrCannotBindQueryParam APIErr      = "クエリパラメータのデータ形式が不正です"
 )
 
 type ErrResopnse struct {
