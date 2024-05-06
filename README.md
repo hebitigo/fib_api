@@ -8,6 +8,48 @@ URL:https://api-image-iwk3r242za-uw.a.run.app/
 
 GET /fibonacci?n={number}
 
+渡された問題には例としてフィボナッチ数は 1,1,2,3,5,....のような数列であると書かれており、またリクエスト例として
+GET /fibonacci?n=99
+のリクエストのレスポンスボディが
+
+```
+{
+    "result":218922995834555169026
+}
+```
+
+となっていたため、与えられた条件と整合性が取れるように
+
+GET /fibonacci
+
+のクエリパラメータは n >= 1 の整数のときに有効な値とみなし、
+
+```
+GET /fibonacci?n=1
+
+{
+    "result":1
+}
+```
+
+```
+GET /fibonacci?n=2
+
+{
+    "result":1
+}
+```
+
+```
+GET /fibonacci?n=3
+
+{
+    "result":2
+}
+```
+
+となるような API の仕様にした。
+
 ### Response
 
 #### 正常系
