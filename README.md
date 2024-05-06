@@ -6,7 +6,7 @@ URL:https://api-image-iwk3r242za-uw.a.run.app/
 
 ### Request
 
-GET /fibonacci?n={number}
+GET /fib?n={number}
 
 渡された問題には例としてフィボナッチ数は 1,1,2,3,5,....のような数列であると書かれており、またリクエスト例として
 GET /fibonacci?n=99
@@ -20,12 +20,12 @@ GET /fibonacci?n=99
 
 となっていたため、与えられた条件と整合性が取れるように
 
-GET /fibonacci
+GET /fib
 
 のクエリパラメータは n >= 1 の整数のときに有効な値とみなし、
 
 ```
-GET /fibonacci?n=1
+GET /fib?n=1
 
 {
     "result":1
@@ -33,7 +33,7 @@ GET /fibonacci?n=1
 ```
 
 ```
-GET /fibonacci?n=2
+GET /fib?n=2
 
 {
     "result":1
@@ -41,7 +41,7 @@ GET /fibonacci?n=2
 ```
 
 ```
-GET /fibonacci?n=3
+GET /fib?n=3
 
 {
     "result":2
