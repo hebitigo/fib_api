@@ -26,15 +26,15 @@ func TestFibbonacci(t *testing.T) {
 		{
 			name: "Test Fibbonacci 25",
 			args: args{n: 99},
-			want: func() *big.Int{
-				bI, _ := new(big.Int).SetString("218922995834555169026",10)
+			want: func() *big.Int {
+				bI, _ := new(big.Int).SetString("218922995834555169026", 10)
 				return bI
 			}(),
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			assert.Equal(t, tt.want, Fibbonacci(tt.args.n)[tt.args.n-1])
+			assert.Equal(t, tt.want, Fibbonacci(tt.args.n))
 		})
 	}
 }
