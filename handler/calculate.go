@@ -60,7 +60,7 @@ func calculateFibonacciWithTimeout(ctx context.Context, count int) (*big.Int, er
 	resultCh := make(chan *big.Int)
 	go func() {
 		result := utils.Fibbonacci(count)
-		resultCh <- result[count-1]
+		resultCh <- result
 	}()
 	select {
 	case <-ctx.Done():
